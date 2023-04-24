@@ -1,0 +1,94 @@
+$primary: #21b4af;
+$primary-hover: #25d1c3;
+$primary-active: #175e66;
+
+$secondary: #0515f2;
+$secondary-hover: #4955ff;
+$secondary-active: #020da7;
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0515f225;
+  width: 450px;
+  height: 400px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 4px solid $primary;
+
+  h1 {
+    text-align: center;
+    color: $primary-hover;
+    text-shadow: 0 0 1px white;
+  }
+
+  p {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(197, 40, 40);
+    font-weight: 600;
+    text-shadow: 0 1px 1px black;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    justify-content: center;
+
+    input {
+      border: none;
+      outline: none;
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+      height: 50px;
+      text-indent: 10px;
+      border-radius: 10px;
+      border: 2px solid $primary;
+      background-color: #0f4046fb;
+      color: aliceblue;
+      transition: all 0.2s ease-in-out;
+
+      &:focus {
+        background-color: #0b2b30fb;
+      }
+    }
+
+    button {
+      border: none;
+      outline: none;
+      background-color: $primary;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(61, 61, 61, 0.301);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: aliceblue;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $primary-hover;
+        color: rgb(252, 252, 252);
+      }
+
+      &:active {
+        transform: scale(0.97);
+        background-color: $primary-active;
+        color: rgb(182, 183, 184);
+      }
+    }
+  }
+}

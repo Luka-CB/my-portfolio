@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+$primary: #21b4af;
+$primary-hover: #25d1c3;
+$primary-active: #175e66;
+
+$secondary: #0515f2;
+$secondary-hover: #4955ff;
+$secondary-active: #020da7;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Montserrat", sans-serif;
+  background-image: url("../public/imgs/spaceship_3.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.homeIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 3rem;
+  margin: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding: 5px;
+  color: $primary;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    color: $primary-hover;
+    box-shadow: 0 0 5px black;
+    background-color: #175e66;
+  }
+}

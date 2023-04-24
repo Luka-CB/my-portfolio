@@ -1,0 +1,100 @@
+$primary: #21b4af;
+$primary-hover: #25d1c3;
+$primary-active: #175e66;
+
+$secondary: #0515f2;
+$secondary-hover: #4955ff;
+$secondary-active: #020da7;
+
+.container {
+  background-color: rgba(240, 248, 255, 0.123);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  position: absolute;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $primary-active;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $primary;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $primary-hover;
+  }
+
+  .icons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .backHome {
+      .homeIcon {
+        font-size: 3rem;
+        margin: 10px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        padding: 5px;
+        color: $primary;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          color: $primary-hover;
+          box-shadow: 0 0 5px black;
+          background-color: #175e66;
+        }
+      }
+    }
+
+    .logout {
+      margin: 10px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      .logoutIcon {
+        font-size: 3rem;
+        color: $primary-active;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover {
+        box-shadow: 0 0 4px black;
+        background-color: $primary-active;
+
+        .logoutIcon {
+          color: $primary-hover;
+        }
+      }
+    }
+  }
+
+  .content {
+    .col1 {
+      width: 80%;
+      margin: auto;
+      margin-top: 30px;
+    }
+
+    .col2 {
+      flex: 1;
+      margin: 80px 0 80px 10px;
+    }
+  }
+}
