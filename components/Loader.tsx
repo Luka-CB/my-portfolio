@@ -1,9 +1,21 @@
 import styles from "../styles/Loader.module.scss";
 
-export const ButtonLoader = () => {
+interface loaderIFace {
+  width: number;
+  height: number;
+}
+
+export const ButtonLoader: React.FC<loaderIFace> = ({
+  width = 50,
+  height = 50,
+}) => {
+  const size = {
+    width,
+    height,
+  };
   return (
     <div className={styles.loaderWrapper}>
-      <span className={styles.loader}></span>
+      <span style={size} className={styles.loader}></span>
     </div>
   );
 };

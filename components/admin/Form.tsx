@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import supabase from "../../config/supabaseClient";
 import styles from "../../styles/AdminForm.module.scss";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
+import { ProjectContext } from "@/context/project";
+import { ButtonLoader } from "../Loader";
 
 interface additionalInputIFace {
   id: string;
@@ -26,8 +28,17 @@ const Form = () => {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [siteUrl, setSiteUrl] = useState("");
-  const [codeUrl, setCodeUrl] = useState("");
+  const [frontendUrl, setFrontendUrl] = useState("");
+  const [backendUrl, setBackendUrl] = useState("");
   const [description, setDescription] = useState("");
+
+  const {
+    addProjectLoading,
+    addProject,
+    projects,
+    addProjectSuccess,
+    resetProjectContext,
+  } = useContext(ProjectContext);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -40,21 +51,38 @@ const Form = () => {
       };
     });
 
-    const { data, error } = await supabase
-      .from("projects")
-      .insert({
-        name,
-        displayImage: imageUrl,
-        websiteUrl: siteUrl,
-        codeUrl,
-        description,
-        screenshots: formattedAdditionalInputs,
-      })
-      .select();
-
-    if (error) console.log(error);
-    if (data) console.log(data);
+    addProject({
+      name,
+      displayImage: imageUrl,
+      websiteUrl: siteUrl,
+      frontendUrl,
+      backendUrl,
+      description,
+      screenshots: formattedAdditionalInputs,
+    });
   };
+
+  console.log(projects);
+
+  useEffect(() => {
+    if (addProjectSuccess) {
+      resetProjectContext();
+      setName("");
+      setImageUrl("");
+      setSiteUrl("");
+      setFrontendUrl("");
+      setBackendUrl("");
+      setDescription("");
+      setAdditionalInputs([
+        {
+          id: "",
+          additinalInputCount: 1,
+          description: "",
+          screenshotUrl: "",
+        },
+      ]);
+    }
+  }, [addProjectSuccess]);
 
   const handleAddMoreInput = () => {
     setAdditionalInputs((prev) => [
@@ -113,9 +141,16 @@ const Form = () => {
           />
           <input
             type="text"
-            placeholder="Enter code url"
-            value={codeUrl}
-            onChange={(e) => setCodeUrl(e.target.value)}
+            placeholder="Enter frontend url"
+            value={frontendUrl}
+            onChange={(e) => setFrontendUrl(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Enter backend url"
+            value={backendUrl}
+            onChange={(e) => setBackendUrl(e.target.value)}
             required
           />
           <textarea
@@ -127,7 +162,11 @@ const Form = () => {
             required
           ></textarea>
           <button type="submit" className={styles.submitBtn}>
-            Submit
+            {addProjectLoading ? (
+              <ButtonLoader width={25} height={25} />
+            ) : (
+              "Submit"
+            )}
           </button>
         </div>
         <div className={styles.additionalInputs}>

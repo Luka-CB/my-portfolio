@@ -65,273 +65,365 @@ $secondary-active: #020da7;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     gap: 2em;
+    position: relative;
 
-    .project {
-      background-color: #0515f221;
-      width: 450px;
-      max-height: 350px;
-      border-radius: 10px;
-      box-shadow: 0 0 4px black;
-      transition: all 0.2s ease-in-out;
+    .projectWrapper {
+      position: relative;
 
-      .displayImage {
-        width: 100%;
-        height: 250px;
+      .project {
+        background-color: #0515f221;
+        width: 450px;
+        max-height: 350px;
         border-radius: 10px;
-        position: relative;
+        box-shadow: 0 0 4px black;
         transition: all 0.2s ease-in-out;
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          transition: all 0.2s ease-in-out;
-        }
-
-        .overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          opacity: 0;
-          background-color: rgba(0, 0, 0, 0.37);
-          backdrop-filter: blur(6px);
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          transition: all 0.2s ease-in-out;
-
-          .name {
-            text-transform: capitalize;
-            color: aliceblue;
-            opacity: 0;
-            font-size: small;
-            transition: all 0.2s ease-in-out;
-            transition-delay: 200ms;
-          }
-        }
-
-        .info {
-          position: absolute;
-          bottom: 0;
-          right: 0;
-          margin: 10px 20px;
-          padding: 2px;
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          transition: all 0.1s ease-in-out;
-
-          .infoIcon {
-            font-size: 0.5rem;
-            opacity: 0;
-            color: $primary-hover;
-          }
-
-          &:hover {
-            background-color: #00000036;
-          }
-        }
-      }
-
-      &:hover {
         .displayImage {
+          width: 100%;
+          height: 250px;
+          border-radius: 10px;
+          position: relative;
+          transition: all 0.2s ease-in-out;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            transition: all 0.2s ease-in-out;
+          }
+
           .overlay {
-            opacity: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(6px);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease-in-out;
 
             .name {
-              transform: scale(3);
+              text-transform: capitalize;
+              color: aliceblue;
+              opacity: 0;
+              font-size: small;
+              transition: all 0.2s ease-in-out;
+              transition-delay: 200ms;
+            }
+          }
+
+          .info {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 10px 20px;
+            padding: 2px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+
+            .infoIcon {
+              font-size: 0.5rem;
+              opacity: 0;
+              color: $primary-hover;
+            }
+
+            &:hover {
+              background-color: #00000036;
+            }
+          }
+
+          @media (max-width: 900px) {
+            .overlay {
               opacity: 1;
+
+              .name {
+                opacity: 1;
+                transform: scale(3);
+              }
             }
 
             .info {
               .infoIcon {
                 opacity: 1;
                 font-size: 2.8rem;
-                transition: all 0.2s ease-in-out;
-                transition-delay: 800ms;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          .displayImage {
+            .overlay {
+              opacity: 1;
+
+              .name {
+                transform: scale(3);
+                opacity: 1;
+              }
+
+              .info {
+                .infoIcon {
+                  opacity: 1;
+                  font-size: 2.8rem;
+                  transition: all 0.2s ease-in-out;
+                  transition-delay: 800ms;
+                }
+              }
+            }
+          }
+        }
+
+        .btns {
+          width: 95%;
+          height: 80px;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .viewBtn {
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            border: 1px solid rgba(0, 0, 0, 0.205);
+            outline: none;
+            background-color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+
+            .viewIcon {
+              color: $secondary;
+              font-size: 1.8rem;
+              margin-right: 10px;
+              transition: all 0.2s ease-in-out;
+            }
+
+            span {
+              font-size: large;
+              text-transform: uppercase;
+              color: aliceblue;
+              transition: all 0.2s ease-in-out;
+            }
+
+            &:hover {
+              background-color: $primary-hover;
+
+              .viewIcon {
+                color: $secondary-hover;
+              }
+
+              span {
+                color: rgb(255, 255, 255);
+              }
+            }
+
+            &:active {
+              background-color: $primary-active;
+              transform: scale(0.97);
+
+              .viewIcon {
+                color: $secondary-active;
+              }
+
+              span {
+                color: rgb(180, 179, 179);
+              }
+            }
+          }
+
+          .codeBtn {
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            border: 1px solid rgba(0, 0, 0, 0.205);
+            outline: none;
+            background-color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+
+            .codeIcon {
+              color: $secondary;
+              font-size: 1.8rem;
+              margin-right: 10px;
+              transition: all 0.2s ease-in-out;
+            }
+
+            span {
+              font-size: large;
+              text-transform: uppercase;
+              color: aliceblue;
+              transition: all 0.2s ease-in-out;
+            }
+
+            .caret {
+              width: 30px;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              .divider {
+                width: 1px;
+                height: 100%;
+                background-color: #175a6175;
+              }
+
+              .caretIcon {
+                font-size: 1.2rem;
+                color: #bceeea;
+                margin-left: 7px;
+              }
+            }
+
+            &:hover {
+              background-color: $primary-hover;
+
+              .codeIcon {
+                color: $secondary-hover;
+              }
+
+              span {
+                color: rgb(255, 255, 255);
+              }
+            }
+
+            &:active {
+              background-color: $primary-active;
+              transform: scale(0.97);
+
+              .codeIcon {
+                color: $secondary-active;
+              }
+
+              span {
+                color: rgb(180, 179, 179);
               }
             }
           }
         }
       }
 
-      .btns {
-        width: 95%;
-        height: 80px;
-        margin: auto;
+      .options {
+        position: absolute;
+        background-color: aliceblue;
+        width: 200px;
+        border: 2px solid $primary;
+        border-radius: 7px;
+        top: 97%;
+        right: 10px;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
+        flex-direction: column;
+        z-index: 1;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.37);
 
-        .viewBtn {
-          width: 200px;
-          height: 50px;
-          border-radius: 10px;
-          border: none;
-          border: 1px solid rgba(0, 0, 0, 0.205);
-          outline: none;
-          background-color: $primary;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s ease-in-out;
-
-          .viewIcon {
-            color: $secondary;
-            font-size: 1.8rem;
-            margin-right: 10px;
-            transition: all 0.2s ease-in-out;
-          }
-
-          span {
-            font-size: large;
-            text-transform: uppercase;
-            color: aliceblue;
-            transition: all 0.2s ease-in-out;
-          }
+        .link {
+          color: black;
+          padding: 10px 0;
+          width: 100%;
+          text-align: center;
+          font-size: medium;
+          color: $primary-active;
+          text-transform: uppercase;
 
           &:hover {
-            background-color: $primary-hover;
-
-            .viewIcon {
-              color: $secondary-hover;
-            }
-
-            span {
-              color: rgb(255, 255, 255);
-            }
-          }
-
-          &:active {
-            background-color: $primary-active;
-            transform: scale(0.97);
-
-            .viewIcon {
-              color: $secondary-active;
-            }
-
-            span {
-              color: rgb(180, 179, 179);
-            }
-          }
-        }
-
-        .codeBtn {
-          width: 200px;
-          height: 50px;
-          border-radius: 10px;
-          border: none;
-          border: 1px solid rgba(0, 0, 0, 0.205);
-          outline: none;
-          background-color: $primary;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          transition: all 0.2s ease-in-out;
-
-          .codeIcon {
-            color: $secondary;
-            font-size: 1.8rem;
-            margin-right: 10px;
-            transition: all 0.2s ease-in-out;
-          }
-
-          span {
-            font-size: large;
-            text-transform: uppercase;
-            color: aliceblue;
-            transition: all 0.2s ease-in-out;
-          }
-
-          &:hover {
-            background-color: $primary-hover;
-
-            .codeIcon {
-              color: $secondary-hover;
-            }
-
-            span {
-              color: rgb(255, 255, 255);
-            }
-          }
-
-          &:active {
-            background-color: $primary-active;
-            transform: scale(0.97);
-
-            .codeIcon {
-              color: $secondary-active;
-            }
-
-            span {
-              color: rgb(180, 179, 179);
-            }
+            background-color: #175e662c;
+            color: #0c8b99;
           }
         }
       }
     }
 
     @media (max-width: 1500px) {
-      .project {
-        width: 280px;
-        height: 230px;
+      .projectWrapper {
+        .project {
+          width: 280px;
+          height: 230px;
 
-        .displayImage {
-          width: 100%;
-          height: 170px;
+          .displayImage {
+            width: 100%;
+            height: 170px;
 
-          .overlay {
-            .name {
-              font-size: 0.5rem;
+            .overlay {
+              .name {
+                font-size: 0.5rem;
+              }
+            }
+
+            .info {
+              width: 40px;
+              height: 40px;
             }
           }
 
-          .info {
-            width: 40px;
-            height: 40px;
+          .btns {
+            width: 95%;
+            height: 60px;
+
+            .viewBtn {
+              width: 120px;
+              height: 40px;
+
+              .viewIcon {
+                font-size: 1.2rem;
+              }
+
+              span {
+                font-size: smaller;
+              }
+            }
+
+            .codeBtn {
+              width: 120px;
+              height: 40px;
+
+              .codeIcon {
+                font-size: 1.2rem;
+              }
+
+              span {
+                font-size: 0.6rem;
+              }
+
+              .caret {
+                .caretIcon {
+                  font-size: 0.7rem;
+                }
+              }
+            }
           }
         }
 
-        .btns {
-          width: 95%;
-          height: 60px;
+        .options {
+          width: 120px;
+          top: 84%;
+          right: 6px;
 
-          .viewBtn {
-            width: 120px;
-            height: 40px;
-
-            .viewIcon {
-              font-size: 1.2rem;
-            }
-
-            span {
-              font-size: smaller;
-            }
-          }
-
-          .codeBtn {
-            width: 120px;
-            height: 40px;
-
-            .codeIcon {
-              font-size: 1.2rem;
-            }
-
-            span {
-              font-size: smaller;
-            }
+          .link {
+            font-size: small;
           }
         }
       }
@@ -340,35 +432,43 @@ $secondary-active: #020da7;
     @media (max-width: 1000px) {
       grid-template-columns: repeat(2, 1fr);
 
-      .project {
-        width: 350px;
+      .projectWrapper {
+        .project {
+          width: 350px;
 
-        .btns {
-          width: 95%;
+          .btns {
+            width: 95%;
 
-          .viewBtn {
-            width: 150px;
+            .viewBtn {
+              width: 150px;
 
-            .viewIcon {
-              font-size: 1.5rem;
+              .viewIcon {
+                font-size: 1.5rem;
+              }
+
+              span {
+                font-size: small;
+              }
             }
 
-            span {
-              font-size: small;
+            .codeBtn {
+              width: 150px;
+
+              .codeIcon {
+                font-size: 1.5rem;
+              }
+
+              span {
+                font-size: small;
+              }
             }
           }
+        }
 
-          .codeBtn {
-            width: 150px;
-
-            .codeIcon {
-              font-size: 1.5rem;
-            }
-
-            span {
-              font-size: small;
-            }
-          }
+        .options {
+          width: 150px;
+          top: 97%;
+          right: 9px;
         }
       }
     }
@@ -378,87 +478,126 @@ $secondary-active: #020da7;
       flex-direction: column;
       align-items: center;
 
-      .project {
-        width: 480px;
-        height: 350px;
+      .projectWrapper {
+        .project {
+          width: 480px;
+          height: 350px;
 
-        .displayImage {
-          height: 270px;
+          .displayImage {
+            height: 270px;
+          }
+
+          .btns {
+            height: 80px;
+
+            .viewBtn {
+              width: 200px;
+              height: 50px;
+
+              .viewIcon {
+                font-size: 1.8rem;
+              }
+
+              span {
+                font-size: large;
+              }
+            }
+
+            .codeBtn {
+              width: 200px;
+              height: 50px;
+
+              .codeIcon {
+                font-size: 1.8rem;
+              }
+
+              span {
+                font-size: large;
+              }
+            }
+          }
         }
 
-        .btns {
-          height: 80px;
-
-          .viewBtn {
-            width: 200px;
-            height: 50px;
-
-            .viewIcon {
-              font-size: 1.8rem;
-            }
-
-            span {
-              font-size: large;
-            }
-          }
-
-          .codeBtn {
-            width: 200px;
-            height: 50px;
-
-            .codeIcon {
-              font-size: 1.8rem;
-            }
-
-            span {
-              font-size: large;
-            }
-          }
+        .options {
+          width: 200px;
+          top: 97%;
+          right: 12px;
         }
       }
     }
 
     @media (max-width: 500px) {
-      .project {
-        min-width: 240px;
-        width: 100%;
-        height: 340px;
+      .projectWrapper {
+        .project {
+          min-width: 240px;
+          width: 100%;
+          height: 340px;
 
-        .displayImage {
-          height: 220px;
+          .displayImage {
+            height: 220px;
+          }
+
+          .btns {
+            height: 100px;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 10px;
+
+            .viewBtn {
+              width: 100%;
+              height: 40px;
+
+              .viewIcon {
+                font-size: 1.6rem;
+              }
+
+              span {
+                font-size: medium;
+              }
+            }
+
+            .codeBtn {
+              width: 100%;
+              height: 40px;
+              justify-content: center;
+
+              .codeIcon {
+                font-size: 1.6rem;
+              }
+
+              span {
+                font-size: medium;
+              }
+
+              .caret {
+                position: absolute;
+                right: 0;
+                width: 50px;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .divider {
+                  width: 1px;
+                  height: 100%;
+                  background-color: #175a6175;
+                }
+
+                .caretIcon {
+                  font-size: 1.2rem;
+                  color: #bceeea;
+                  margin-left: 10px;
+                }
+              }
+            }
+          }
         }
 
-        .btns {
-          height: 100px;
-          flex-direction: column;
-          justify-content: space-around;
-          margin-top: 10px;
-
-          .viewBtn {
-            width: 100%;
-            height: 40px;
-
-            .viewIcon {
-              font-size: 1.6rem;
-            }
-
-            span {
-              font-size: medium;
-            }
-          }
-
-          .codeBtn {
-            width: 100%;
-            height: 40px;
-
-            .codeIcon {
-              font-size: 1.6rem;
-            }
-
-            span {
-              font-size: medium;
-            }
-          }
+        .options {
+          width: 95%;
+          top: 97%;
+          right: 9px;
         }
       }
     }
@@ -472,57 +611,80 @@ $secondary-active: #020da7;
       justify-items: center;
       gap: 2em;
 
-      .project {
-        width: 550px;
-        max-height: 450px;
-        border-radius: 20px;
-
-        .displayImage {
-          width: 100%;
-          height: 300px;
+      .projectWrapper {
+        .project {
+          width: 550px;
+          max-height: 450px;
           border-radius: 20px;
 
-          img {
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+          .displayImage {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+
+            img {
+              border-top-left-radius: 20px;
+              border-top-right-radius: 20px;
+            }
+
+            .info {
+              width: 60px;
+              height: 60px;
+            }
           }
 
-          .info {
-            width: 60px;
-            height: 60px;
+          .btns {
+            height: 120px;
+
+            .viewBtn {
+              width: 240px;
+              height: 60px;
+              border-radius: 15px;
+
+              .viewIcon {
+                font-size: 2.3rem;
+                margin-right: 15px;
+              }
+
+              span {
+                font-size: 1.3rem;
+              }
+            }
+
+            .codeBtn {
+              width: 240px;
+              height: 60px;
+              border-radius: 15px;
+
+              .codeIcon {
+                font-size: 2.3rem;
+                margin-right: 15px;
+              }
+
+              span {
+                font-size: 1.3rem;
+              }
+            }
           }
         }
 
-        .btns {
-          height: 120px;
+        .options {
+          width: 240px;
+          top: 94%;
+          right: 15px;
 
-          .viewBtn {
-            width: 240px;
-            height: 60px;
-            border-radius: 15px;
+          .link {
+            color: black;
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            color: $primary-active;
+            text-transform: uppercase;
 
-            .viewIcon {
-              font-size: 2.3rem;
-              margin-right: 15px;
-            }
-
-            span {
-              font-size: 1.3rem;
-            }
-          }
-
-          .codeBtn {
-            width: 240px;
-            height: 60px;
-            border-radius: 15px;
-
-            .codeIcon {
-              font-size: 2.3rem;
-              margin-right: 15px;
-            }
-
-            span {
-              font-size: 1.3rem;
+            &:hover {
+              background-color: #175e662c;
+              color: #0c8b99;
             }
           }
         }

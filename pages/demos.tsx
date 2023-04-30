@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styles from "../styles/Demos.module.scss";
 import { AiTwotoneHome } from "react-icons/ai";
 import { useRouter } from "next/router";
 import Projects from "@/components/Projects";
 import InfoModal from "@/components/InfoModal";
 import { InfoModalContext } from "@/context/infoModal";
+import { CodeLinkOptContext } from "@/context/codeLinkOptions";
 
 const projects = [
   {
@@ -202,12 +203,15 @@ const demos = () => {
   const router = useRouter();
 
   const { isinfoModalOpen } = useContext(InfoModalContext);
+  const { isCodeBtnOptionOpen, setIsCodeBtnOptionOpen, projectIndex } =
+    useContext(CodeLinkOptContext);
 
   return (
     <div
       className={
         isinfoModalOpen ? styles.container : styles.containerWithScroll
       }
+      onClick={() => setIsCodeBtnOptionOpen(false)}
     >
       <AiTwotoneHome
         className="homeIcon"
@@ -215,8 +219,20 @@ const demos = () => {
         onClick={() => router.push("/")}
       />
       <div className={styles.projects}>
-        {projects.map((project) => (
-          <Projects key={project.id} project={project} />
+        {projects.map((project, i) => (
+          <div className={styles.projectWrapper} key={project.id}>
+            <Projects project={project} index={i} />
+            {isCodeBtnOptionOpen && i === projectIndex ? (
+              <div className={styles.options}>
+                <a href="#" className={styles.link}>
+                  frontend
+                </a>
+                <a href="#" className={styles.link}>
+                  backend
+                </a>
+              </div>
+            ) : null}
+          </div>
         ))}
       </div>
 
