@@ -10,7 +10,7 @@ import { ProjectContext } from "@/context/project";
 import Project from "@/components/admin/Project";
 import { Loader } from "@/components/Loader";
 
-const admin = () => {
+const Admin = () => {
   const { user, setUser } = useContext(SigninContext);
   const { getProjects, getProjectsLoading, projects } =
     useContext(ProjectContext);
@@ -19,7 +19,7 @@ const admin = () => {
 
   useEffect(() => {
     getProjects();
-  }, []);
+  }, [getProjects]);
 
   const handleLogout = () => {
     localStorage.removeItem("portfolioAdmin");
@@ -73,4 +73,4 @@ const admin = () => {
   );
 };
 
-export default admin;
+export default Admin;

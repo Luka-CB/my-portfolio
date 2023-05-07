@@ -81,7 +81,12 @@ const Form = () => {
         },
       ]);
     }
-  }, [addProjectSuccess]);
+  }, [
+    addProjectSuccess,
+    resetProjectContext,
+    setAdditionalInputs,
+    setImageUrls,
+  ]);
 
   let disabled: any;
 

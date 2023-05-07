@@ -11,7 +11,7 @@ import { Loader } from "@/components/Loader";
 import Carousel from "@/components/Carousel";
 import { CarouselContext } from "@/context/carousel";
 
-const demos = () => {
+const Demos = () => {
   const router = useRouter();
 
   const { isinfoModalOpen } = useContext(InfoModalContext);
@@ -23,7 +23,7 @@ const demos = () => {
 
   useEffect(() => {
     getProjects();
-  }, []);
+  }, [getProjects]);
 
   return (
     <div
@@ -77,4 +77,4 @@ const demos = () => {
   );
 };
 
-export default demos;
+export default Demos;
