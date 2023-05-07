@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { ProjectContext } from "@/context/project";
 import Project from "@/components/admin/Project";
 import { Loader } from "@/components/Loader";
+import Head from "next/head";
 
 const Admin = () => {
   const { user, setUser } = useContext(SigninContext);
@@ -28,6 +29,11 @@ const Admin = () => {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Admin | Add Project</title>
+        <meta name="description" content="This is may portfolio" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       {!user?.id ? (
         <Login />
       ) : (

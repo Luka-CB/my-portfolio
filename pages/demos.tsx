@@ -10,6 +10,7 @@ import { ProjectContext } from "@/context/project";
 import { Loader } from "@/components/Loader";
 import Carousel from "@/components/Carousel";
 import { CarouselContext } from "@/context/carousel";
+import Head from "next/head";
 
 const Demos = () => {
   const router = useRouter();
@@ -32,6 +33,11 @@ const Demos = () => {
       }
       onClick={() => setIsCodeBtnOptionOpen(false)}
     >
+      <Head>
+        <title>Projects | {projects?.length}</title>
+        <meta name="description" content="This is may portfolio" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <AiTwotoneHome
         className="homeIcon"
         title="Home Page"
