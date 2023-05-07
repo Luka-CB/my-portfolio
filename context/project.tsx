@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, ReactNode, useState, useCallback } from "react";
 import supabase from "@/config/supabaseClient";
 
 interface childrenIFace {
@@ -79,7 +79,7 @@ const ProjectProvider = ({ children }: childrenIFace) => {
     }
   };
 
-  const getProjects = async () => {
+  const getProjects = useCallback(async () => {
     setGetProjectsLoading(true);
 
     const { data, error }: any = await supabase.from("projects").select();
@@ -93,7 +93,7 @@ const ProjectProvider = ({ children }: childrenIFace) => {
       setGetProjectsLoading(false);
       setProjects(data);
     }
-  };
+  }, []);
 
   const contextData = {
     projects,
