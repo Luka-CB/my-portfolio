@@ -62,10 +62,11 @@ $secondary-active: #020da7;
     }
 
     .close {
-      position: absolute;
+      position: fixed;
       right: 0;
       top: 0;
       margin: 5px;
+      float: right;
 
       .closeIcon {
         font-size: 2rem;
@@ -120,6 +121,7 @@ $secondary-active: #020da7;
           box-shadow: 0 2px 5px black;
           border-radius: 15px;
           transition: all 0.2s ease-in-out;
+          cursor: zoom-in;
 
           img {
             width: 100%;
@@ -195,6 +197,7 @@ $secondary-active: #020da7;
             box-shadow: 0 2px 5px black;
             border-radius: 15px;
             transition: all 0.2s ease-in-out;
+            cursor: zoom-in;
 
             img {
               width: 100%;

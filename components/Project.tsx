@@ -4,23 +4,15 @@ import { VscOpenPreview, VscCode, VscInfo } from "react-icons/vsc";
 import { AiFillCaretDown } from "react-icons/ai";
 import { InfoModalContext } from "@/context/infoModal";
 import { CodeLinkOptContext } from "@/context/codeLinkOptions";
+import { projectDataIFace } from "@/context/project";
+import Link from "next/link";
 
 interface propsIFace {
-  index: number | null;
-  project: {
-    id: string;
-    name: string;
-    description: string;
-    displayImage: string;
-    screenshots: {
-      id: string;
-      description: string;
-      screenshot: string;
-    }[];
-  };
+  index?: number | null;
+  project: projectDataIFace;
 }
 
-const Projects: React.FC<propsIFace> = ({ project, index }) => {
+const Project: React.FC<propsIFace> = ({ project, index }) => {
   const { setIsInfoModalOpen, setPickedInfo } = useContext(InfoModalContext);
   const { setIsCodeBtnOptionOpen, setProjectIndex } =
     useContext(CodeLinkOptContext);
@@ -39,7 +31,7 @@ const Projects: React.FC<propsIFace> = ({ project, index }) => {
   return (
     <div className={styles.project}>
       <div className={styles.displayImage}>
-        <img src={project.displayImage} alt={project.name} />
+        <img src={project.displayImages[0].url} alt={project.name} />
         <div className={styles.overlay}>
           <h1 className={styles.name}>{project.name}</h1>
           <div
@@ -53,8 +45,10 @@ const Projects: React.FC<propsIFace> = ({ project, index }) => {
       </div>
       <div className={styles.btns}>
         <button className={styles.viewBtn}>
-          <VscOpenPreview className={styles.viewIcon} />
-          <span>view website</span>
+          <Link href={project.websiteUrl} target="_blank">
+            <VscOpenPreview className={styles.viewIcon} />
+            <span>view website</span>
+          </Link>
         </button>
         <button className={styles.codeBtn} onClick={handleOpenOptions}>
           <VscCode className={styles.codeIcon} />
@@ -69,4 +63,4 @@ const Projects: React.FC<propsIFace> = ({ project, index }) => {
   );
 };
 
-export default Projects;
+export default Project;

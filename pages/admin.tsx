@@ -1,17 +1,25 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styles from "../styles/Admin.module.scss";
-import supabase from "../config/supabaseClient";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import { AiTwotoneHome } from "react-icons/ai";
 import Form from "@/components/admin/Form";
 import Login from "@/components/admin/Login";
 import { SigninContext } from "@/context/signin";
 import { useRouter } from "next/router";
+import { ProjectContext } from "@/context/project";
+import Project from "@/components/admin/Project";
+import { Loader } from "@/components/Loader";
 
 const admin = () => {
   const { user, setUser } = useContext(SigninContext);
+  const { getProjects, getProjectsLoading, projects } =
+    useContext(ProjectContext);
 
   const router = useRouter();
+
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("portfolioAdmin");
@@ -44,8 +52,19 @@ const admin = () => {
             <div className={styles.col1}>
               <Form />
             </div>
+            <hr />
             <div className={styles.col2}>
-              <h1>Other Content</h1>
+              {getProjectsLoading ? (
+                <div className={styles.spinner}>
+                  <Loader />
+                </div>
+              ) : (
+                <>
+                  {projects?.map((project) => (
+                    <Project key={project.id} project={project} />
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </>

@@ -1,0 +1,77 @@
+$primary: #21b4af;
+$primary-hover: #25d1c3;
+$primary-active: #175e66;
+
+$secondary: #0515f2;
+$secondary-hover: #4955ff;
+$secondary-active: #020da7;
+
+.container {
+  margin-top: 20px;
+
+  .inputWrapper {
+    display: flex;
+    align-items: center;
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+
+    input {
+      margin-right: 10px;
+      width: 80%;
+    }
+
+    button {
+      width: 70px;
+      height: 30px;
+      border: none;
+      outline: none;
+      background-color: $primary;
+      border-radius: 7px;
+      color: aliceblue;
+      box-shadow: 0 0 2px black;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: $primary-hover;
+        color: rgb(255, 255, 255);
+      }
+
+      &:active {
+        background-color: $primary-active;
+        color: rgb(177, 177, 177);
+        transform: scale(0.97);
+      }
+
+      &:disabled {
+        background-color: #a5a8a85d;
+        color: rgba(240, 248, 255, 0.459);
+        cursor: default;
+
+        &:hover {
+          background-color: #a5a8a85d;
+          color: rgba(240, 248, 255, 0.459);
+        }
+
+        &:active {
+          background-color: #a5a8a85d;
+          color: rgba(240, 248, 255, 0.459);
+          transform: none;
+        }
+      }
+    }
+
+    .closeIcon {
+      margin-left: 10px;
+      font-size: 1.4rem;
+      color: $primary-active;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: #053f46;
+      }
+    }
+  }
+}

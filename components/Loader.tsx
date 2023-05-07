@@ -1,14 +1,11 @@
 import styles from "../styles/Loader.module.scss";
 
 interface loaderIFace {
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 }
 
-export const ButtonLoader: React.FC<loaderIFace> = ({
-  width = 50,
-  height = 50,
-}) => {
+export const Loader: React.FC<loaderIFace> = ({ width = 50, height = 50 }) => {
   const size = {
     width,
     height,

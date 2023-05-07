@@ -3,7 +3,7 @@ import styles from "../../styles/AdminLogin.module.scss";
 import supabase from "@/config/supabaseClient";
 import { SigninContext } from "@/context/signin";
 import { AiTwotoneHome } from "react-icons/ai";
-import { ButtonLoader } from "../Loader";
+import { Loader } from "../Loader";
 import { useRouter } from "next/router";
 
 const Login = () => {
@@ -52,7 +52,7 @@ const Login = () => {
           <button type="submit">
             {isLoading ? (
               <>
-                <ButtonLoader />
+                <Loader width={25} height={25} />
                 <span>Signing In</span>
               </>
             ) : (

@@ -8,16 +8,26 @@ interface childrenIFace {
 interface screenshotsIFace {
   id: string;
   description: string;
-  screenshotUrl: string;
+  screenshotUrls?: {
+    id: string;
+    screenshotUrl: string;
+  }[];
 }
 
-interface projectDataIFace {
+interface imageUrlsIFace {
+  id: string;
+  url: string;
+}
+
+export interface projectDataIFace {
+  id?: string;
   name: string;
-  displayImage: string;
+  displayImages: imageUrlsIFace[];
   websiteUrl: string;
   frontendUrl: string;
   backendUrl: string;
   description: string;
+  created_at?: string;
   screenshots: screenshotsIFace[];
 }
 
@@ -26,7 +36,9 @@ interface projectIface {
   addProjectLoading: boolean;
   addProjectSuccess: boolean;
   addProjectError: string;
+  getProjectsLoading: boolean;
   addProject: (projectData: projectDataIFace) => void;
+  getProjects: () => void;
   resetProjectContext: () => void;
 }
 
@@ -38,6 +50,8 @@ const ProjectProvider = ({ children }: childrenIFace) => {
   const [addProjectLoading, setAddProjectLoading] = useState(false);
   const [addProjectSuccess, setAddprojectSuccess] = useState(false);
   const [addProjectError, setAddProjectError] = useState("");
+
+  const [getProjectsLoading, setGetProjectsLoading] = useState(false);
 
   const resetProjectContext = () => {
     setAddProjectLoading(false);
@@ -61,7 +75,23 @@ const ProjectProvider = ({ children }: childrenIFace) => {
     if (data) {
       setAddProjectLoading(false);
       setAddprojectSuccess(true);
-      setProjects((prev: any) => [...prev, data]);
+      setProjects((prev: any) => [...prev, data[0]]);
+    }
+  };
+
+  const getProjects = async () => {
+    setGetProjectsLoading(true);
+
+    const { data, error }: any = await supabase.from("projects").select();
+
+    if (error) {
+      setGetProjectsLoading(false);
+      console.log(error);
+    }
+
+    if (data) {
+      setGetProjectsLoading(false);
+      setProjects(data);
     }
   };
 
@@ -72,6 +102,8 @@ const ProjectProvider = ({ children }: childrenIFace) => {
     addProjectError,
     addProject,
     resetProjectContext,
+    getProjectsLoading,
+    getProjects,
   };
 
   return (

@@ -1,10 +1,12 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styles from "../../styles/Main.module.scss";
-import { BsCloudDownload, BsGithub } from "react-icons/bs";
+import { BsCloudDownload, BsGithub, BsLinkedin } from "react-icons/bs";
 import { DiJavascript1, DiReact } from "react-icons/di";
 import { FaVuejs, FaNodeJs } from "react-icons/fa";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { MdAttachEmail } from "react-icons/md";
+import Link from "next/link";
 
 const MainScreen = () => {
   const router = useRouter();
@@ -22,7 +24,24 @@ const MainScreen = () => {
             </div>
             <div className={styles.row2}>
               <h2 className={styles.row2Text}>full stack web developer</h2>
-              <h4 className={styles.email}>lukaaslamazashvili20@gmail.com</h4>
+
+              <div className={styles.socialWrapper}>
+                <div className={styles.social}>
+                  <MdAttachEmail className={styles.emailIcon} />
+                  <span>-</span>
+                  <h4>lukaaslamazashvili20@gmail.com</h4>
+                </div>
+                <div className={styles.social}>
+                  <BsLinkedin className={styles.linkedinIcon} />
+                  <span>-</span>
+                  <Link
+                    href="https://www.linkedin.com/in/luka-profile"
+                    target="_blank"
+                  >
+                    <h4>www.linkedin.com/in/luka-profile</h4>
+                  </Link>
+                </div>
+              </div>
             </div>
             <hr className={styles.hr} />
             <div className={styles.row3}>
@@ -31,8 +50,10 @@ const MainScreen = () => {
                 <span>cv</span>
               </button>
               <button className={styles.ghBtn}>
-                <BsGithub className={styles.ghIcon} />
-                <span>github</span>
+                <Link href="https://github.com/Luka-CB" target="_blank">
+                  <BsGithub className={styles.ghIcon} />
+                  <span>github</span>
+                </Link>
               </button>
             </div>
             <div className={styles.row4}>
@@ -53,7 +74,7 @@ const MainScreen = () => {
         </div>
         <div className={styles.right}>
           <div className={styles.checkBtnText}>
-            <span>check out som of my</span>
+            <span>check out some of my</span>
             <IoMdArrowDropdownCircle className={styles.arrowIcon} />
           </div>
           <div className={styles.btnWrapper}>

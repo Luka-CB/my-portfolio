@@ -2,12 +2,37 @@ import { useContext } from "react";
 import styles from "../styles/InfoModal.module.scss";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { InfoModalContext } from "@/context/infoModal";
+import { CarouselContext } from "@/context/carousel";
 
 const InfoModal = () => {
   const { setIsInfoModalOpen, pickedInfo } = useContext(InfoModalContext);
+  const { setImages, setIsCarouselOpen } = useContext(CarouselContext);
 
   const handleModalClose = () => {
     setIsInfoModalOpen(false);
+  };
+
+  const handleOpenCarousel = (images: any, type: string) => {
+    let carouselImages;
+
+    if (type === "displayImages") {
+      carouselImages = images.map((img: any) => {
+        return {
+          id: img.id,
+          screenshotUrl: img.url,
+        };
+      });
+    } else {
+      carouselImages = images.map((img: any) => {
+        return {
+          id: img.id,
+          screenshotUrl: img.screenshotUrl,
+        };
+      });
+    }
+
+    setImages(carouselImages);
+    setIsCarouselOpen(true);
   };
 
   return (
@@ -23,7 +48,13 @@ const InfoModal = () => {
           </div>
           <div className={styles.row1_col2}>
             <div className={styles.image}>
-              <img src={pickedInfo.displayImage} alt={pickedInfo.name} />
+              <img
+                src={pickedInfo.displayImages[0].url}
+                alt={pickedInfo.name}
+                onClick={() =>
+                  handleOpenCarousel(pickedInfo.displayImages, "displayImages")
+                }
+              />
             </div>
           </div>
         </div>
@@ -37,8 +68,14 @@ const InfoModal = () => {
               <div className={styles.imageWrapper}>
                 <div className={styles.image}>
                   <img
-                    src={screenshot.screenshot}
+                    src={screenshot.screenshotUrls[0].screenshotUrl}
                     alt={`Screenshot #${i + 1}`}
+                    onClick={() =>
+                      handleOpenCarousel(
+                        screenshot.screenshotUrls,
+                        "screenshotImages"
+                      )
+                    }
                   />
                 </div>
               </div>

@@ -8,12 +8,18 @@ interface pickedInfoIFace {
   id: string;
   name: string;
   description: string;
-  displayImage: string;
+  displayImages: {
+    id: string;
+    url: string;
+  }[];
   screenshots: [
     {
       id: string;
       description: string;
-      screenshot: string;
+      screenshotUrls: {
+        id: string;
+        screenshotUrl: string;
+      }[];
     }
   ];
 }
