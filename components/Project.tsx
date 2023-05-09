@@ -51,12 +51,25 @@ const Project: React.FC<propsIFace> = ({ project, index }) => {
           </Link>
         </button>
         <button className={styles.codeBtn} onClick={handleOpenOptions}>
-          <VscCode className={styles.codeIcon} />
-          <span>view code</span>
-          <div className={styles.caret}>
-            <div className={styles.divider}></div>
-            <AiFillCaretDown className={styles.caretIcon} />
-          </div>
+          {!project.backendUrl ? (
+            <Link
+              className={styles.btnLink}
+              href={project.frontendUrl}
+              target="_blank"
+            >
+              <VscCode className={styles.codeIcon} />
+              <span>view code</span>
+            </Link>
+          ) : (
+            <div className={styles.btnOpt}>
+              <VscCode className={styles.codeIcon} />
+              <span>view code</span>
+              <div className={styles.caret}>
+                <div className={styles.divider}></div>
+                <AiFillCaretDown className={styles.caretIcon} />
+              </div>
+            </div>
+          )}
         </button>
       </div>
     </div>

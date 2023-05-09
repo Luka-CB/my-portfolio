@@ -53,7 +53,9 @@ const Demos = () => {
             {projects.map((project, i) => (
               <div className={styles.projectWrapper} key={project.id}>
                 <Project project={project} index={i} />
-                {isCodeBtnOptionOpen && i === projectIndex ? (
+                {project.backendUrl &&
+                isCodeBtnOptionOpen &&
+                i === projectIndex ? (
                   <div className={styles.options}>
                     <a
                       href={project.frontendUrl}

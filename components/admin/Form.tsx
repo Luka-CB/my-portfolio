@@ -92,12 +92,7 @@ const Form = () => {
 
   if (
     addProjectLoading ||
-    (!name &&
-      !imageUrl &&
-      !siteUrl &&
-      !frontendUrl &&
-      !backendUrl &&
-      !description)
+    (!name && !imageUrl && !siteUrl && !frontendUrl && !description)
   ) {
     disabled = true;
   }
@@ -134,7 +129,6 @@ const Form = () => {
             placeholder="Enter backend code url"
             value={backendUrl}
             onChange={(e) => setBackendUrl(e.target.value)}
-            required
           />
           <textarea
             cols={65}
