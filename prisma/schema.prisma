@@ -21,10 +21,14 @@ model Project {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   screenshots Json[]
+
+  @@map("projects")
 }
 
 model User {
   id String @default(cuid()) @id
   username String
   password String
+
+  @@map("users")
 }

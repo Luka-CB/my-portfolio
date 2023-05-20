@@ -21,8 +21,6 @@ interface propsIface {
 const Admin: React.FC<propsIface> = ({ projects }) => {
   const { user, setUser } = useContext(SigninContext);
 
-  console.log(projects);
-
   const router = useRouter();
 
   const handleLogout = () => {

@@ -53,40 +53,9 @@ const Form = () => {
 
   useEffect(() => {
     if (addProjectSuccess) {
-      resetProjectContext();
-      setName("");
-      setImageUrl("");
-      setSiteUrl("");
-      setFrontendUrl("");
-      setBackendUrl("");
-      setDescription("");
-      setImageUrls([
-        {
-          id: uuidv4(),
-          url: "",
-        },
-      ]);
-      setAdditionalInputs([
-        {
-          id: uuidv4(),
-          additionalInputCount: 1,
-          description: "",
-          screenshotUrls: [
-            {
-              id: uuidv4(),
-              screenshotUrlCount: 1,
-              screenshotUrl: "",
-            },
-          ],
-        },
-      ]);
+      window.location.reload();
     }
-  }, [
-    addProjectSuccess,
-    resetProjectContext,
-    setAdditionalInputs,
-    setImageUrls,
-  ]);
+  }, [addProjectSuccess]);
 
   let disabled: any;
 
