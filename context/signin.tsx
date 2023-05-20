@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
-import supabase from "@/config/supabaseClient";
+import axios from "axios";
 
 interface childrenIFace {
   children: ReactNode;
@@ -16,7 +16,8 @@ interface returnedUserIFace {
 }
 
 interface signinIface {
-  signInWithEmail: (signinData: signinDataIFace) => void;
+  signIn: (signinData: signinDataIFace) => void;
+  resetLogin: () => void;
   user: returnedUserIFace;
   setUser: any;
   error: string;
@@ -36,34 +37,39 @@ const SigninProvider = ({ children }: childrenIFace) => {
     }
   }, []);
 
-  const signInWithEmail = async (signinData: signinDataIFace) => {
+  const resetLogin = () => {
+    setIsLoading(false);
+    setError("");
+  };
+
+  const signIn = async (signinData: signinDataIFace) => {
     setIsLoading(true);
 
-    const { data, error } = await supabase
-      .from("user")
-      .select("id, username")
-      .eq("username", signinData.username)
-      .eq("password", signinData.password)
-      .single();
+    try {
+      const { data } = await axios.post("/api/login", signinData, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-    if (error) {
+      if (data) {
+        setIsLoading(false);
+        setUser(data);
+        localStorage.setItem("portfolioAdmin", JSON.stringify(data));
+      }
+    } catch (error: any) {
       setIsLoading(false);
-      setError("Username or Password is Incorrect!");
-    }
-
-    if (data) {
-      setIsLoading(false);
-      setUser(data);
-      localStorage.setItem("portfolioAdmin", JSON.stringify(data));
+      console.log(error);
+      const errMsg = error.response ? error.response.data.msg : error.message;
+      setError(errMsg);
     }
   };
 
   const contextData = {
-    signInWithEmail,
+    signIn,
     user,
     setUser,
     error,
     isLoading,
+    resetLogin,
   };
 
   return (

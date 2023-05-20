@@ -10,17 +10,20 @@ import { ProjectContext } from "@/context/project";
 import Project from "@/components/admin/Project";
 import { Loader } from "@/components/Loader";
 import Head from "next/head";
+import { prisma } from "../config/prisma";
+import { projectDataIFace } from "@/context/project";
+import { GetServerSideProps } from "next";
 
-const Admin = () => {
+interface propsIface {
+  projects: projectDataIFace[];
+}
+
+const Admin: React.FC<propsIface> = ({ projects }) => {
   const { user, setUser } = useContext(SigninContext);
-  const { getProjects, getProjectsLoading, projects } =
-    useContext(ProjectContext);
+
+  console.log(projects);
 
   const router = useRouter();
-
-  useEffect(() => {
-    getProjects();
-  }, [getProjects]);
 
   const handleLogout = () => {
     localStorage.removeItem("portfolioAdmin");
@@ -60,7 +63,7 @@ const Admin = () => {
             </div>
             <hr />
             <div className={styles.col2}>
-              {getProjectsLoading ? (
+              {false ? (
                 <div className={styles.spinner}>
                   <Loader />
                 </div>
@@ -77,6 +80,14 @@ const Admin = () => {
       )}
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const projects = await prisma.project.findMany();
+
+  return {
+    props: { projects: JSON.parse(JSON.stringify(projects)) },
+  };
 };
 
 export default Admin;

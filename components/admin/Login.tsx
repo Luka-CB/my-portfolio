@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import styles from "../../styles/AdminLogin.module.scss";
-import supabase from "@/config/supabaseClient";
 import { SigninContext } from "@/context/signin";
 import { AiTwotoneHome } from "react-icons/ai";
 import { Loader } from "../Loader";
@@ -12,12 +11,12 @@ const Login = () => {
 
   const router = useRouter();
 
-  const { signInWithEmail, error, isLoading } = useContext(SigninContext);
+  const { signIn, error, isLoading } = useContext(SigninContext);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    signInWithEmail({
+    signIn({
       username,
       password,
     });
@@ -51,10 +50,10 @@ const Login = () => {
 
           <button type="submit">
             {isLoading ? (
-              <>
+              <div className={styles.loadingBtn}>
                 <Loader width={25} height={25} />
                 <span>Signing In</span>
-              </>
+              </div>
             ) : (
               <span>Sign In</span>
             )}

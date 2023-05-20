@@ -6,25 +6,25 @@ import Project from "@/components/Project";
 import InfoModal from "@/components/InfoModal";
 import { InfoModalContext } from "@/context/infoModal";
 import { CodeLinkOptContext } from "@/context/codeLinkOptions";
-import { ProjectContext } from "@/context/project";
+import { projectDataIFace } from "@/context/project";
 import { Loader } from "@/components/Loader";
 import Carousel from "@/components/Carousel";
 import { CarouselContext } from "@/context/carousel";
 import Head from "next/head";
+import { GetServerSideProps } from "next";
+import { prisma } from "../config/prisma";
 
-const Demos = () => {
+interface propsIFace {
+  projects: projectDataIFace[];
+}
+
+const Demos: React.FC<propsIFace> = ({ projects }) => {
   const router = useRouter();
 
   const { isinfoModalOpen } = useContext(InfoModalContext);
   const { isCarouselOpen } = useContext(CarouselContext);
-  const { projects, getProjects, getProjectsLoading } =
-    useContext(ProjectContext);
   const { isCodeBtnOptionOpen, setIsCodeBtnOptionOpen, projectIndex } =
     useContext(CodeLinkOptContext);
-
-  useEffect(() => {
-    getProjects();
-  }, [getProjects]);
 
   return (
     <div
@@ -44,7 +44,7 @@ const Demos = () => {
         onClick={() => router.push("/")}
       />
       <div className={styles.projects}>
-        {getProjectsLoading ? (
+        {false ? (
           <div className={styles.spinner}>
             <Loader />
           </div>
@@ -83,6 +83,16 @@ const Demos = () => {
       {isCarouselOpen ? <Carousel /> : null}
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const projects = await prisma.project.findMany();
+
+  return {
+    props: {
+      projects: JSON.parse(JSON.stringify(projects)),
+    },
+  };
 };
 
 export default Demos;

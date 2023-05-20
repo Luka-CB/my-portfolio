@@ -429,17 +429,22 @@ $secondary-active: #020da7;
               width: 120px;
               height: 40px;
 
-              .codeIcon {
-                font-size: 1.2rem;
-              }
+              .btnLink,
+              .btnOpt {
+                .codeIcon {
+                  font-size: 1.2rem;
+                  margin-right: 5px;
+                }
 
-              span {
-                font-size: 0.6rem;
-              }
+                span {
+                  font-size: 0.6rem;
+                }
 
-              .caret {
-                .caretIcon {
-                  font-size: 0.7rem;
+                .caret {
+                  .caretIcon {
+                    font-size: 1rem;
+                    margin-left: 5px;
+                  }
                 }
               }
             }
@@ -545,12 +550,15 @@ $secondary-active: #020da7;
               width: 200px;
               height: 50px;
 
-              .codeIcon {
-                font-size: 1.8rem;
-              }
+              .btnLink,
+              .btnOpt {
+                .codeIcon {
+                  font-size: 1.8rem;
+                }
 
-              span {
-                font-size: large;
+                span {
+                  font-size: large;
+                }
               }
             }
           }
@@ -603,33 +611,22 @@ $secondary-active: #020da7;
               height: 40px;
               justify-content: center;
 
-              .codeIcon {
-                font-size: 1.6rem;
-              }
-
-              span {
-                font-size: medium;
-              }
-
-              .caret {
-                position: absolute;
-                right: 0;
-                width: 50px;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                .divider {
-                  width: 1px;
-                  height: 100%;
-                  background-color: #175a6175;
+              .btnLink,
+              .btnOpt {
+                .codeIcon {
+                  font-size: 1.8rem;
+                  margin-right: 5px;
                 }
 
-                .caretIcon {
-                  font-size: 1.2rem;
-                  color: #bceeea;
-                  margin-left: 10px;
+                span {
+                  font-size: large;
+                }
+
+                .caret {
+                  .caretIcon {
+                    font-size: 1rem;
+                    margin-left: 10px;
+                  }
                 }
               }
             }

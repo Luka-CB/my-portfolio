@@ -79,6 +79,13 @@ $secondary-active: #020da7;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
 
+      .loadingBtn {
+        width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+
       &:hover {
         background-color: $primary-hover;
         color: rgb(252, 252, 252);

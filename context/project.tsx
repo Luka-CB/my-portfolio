@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useState, useCallback } from "react";
-import supabase from "@/config/supabaseClient";
 
 interface childrenIFace {
   children: ReactNode;
@@ -36,9 +35,7 @@ interface projectIface {
   addProjectLoading: boolean;
   addProjectSuccess: boolean;
   addProjectError: string;
-  getProjectsLoading: boolean;
   addProject: (projectData: projectDataIFace) => void;
-  getProjects: () => void;
   resetProjectContext: () => void;
 }
 
@@ -51,8 +48,6 @@ const ProjectProvider = ({ children }: childrenIFace) => {
   const [addProjectSuccess, setAddprojectSuccess] = useState(false);
   const [addProjectError, setAddProjectError] = useState("");
 
-  const [getProjectsLoading, setGetProjectsLoading] = useState(false);
-
   const resetProjectContext = () => {
     setAddProjectLoading(false);
     setAddprojectSuccess(false);
@@ -62,38 +57,25 @@ const ProjectProvider = ({ children }: childrenIFace) => {
   const addProject = async (projectData: projectDataIFace) => {
     setAddProjectLoading(true);
 
-    const { data, error } = await supabase
-      .from("projects")
-      .insert(projectData)
-      .select();
+    try {
+      const res = await fetch("/api/addProject", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(projectData),
+      });
 
-    if (error) {
+      const data = await res.json();
+
+      if (data) {
+        setAddProjectLoading(false);
+        setAddprojectSuccess(true);
+        setProjects((prev: any) => [...prev, data[0]]);
+      }
+    } catch (error) {
       setAddProjectLoading(false);
       setAddProjectError("Add project request failed!");
     }
-
-    if (data) {
-      setAddProjectLoading(false);
-      setAddprojectSuccess(true);
-      setProjects((prev: any) => [...prev, data[0]]);
-    }
   };
-
-  const getProjects = useCallback(async () => {
-    setGetProjectsLoading(true);
-
-    const { data, error }: any = await supabase.from("projects").select();
-
-    if (error) {
-      setGetProjectsLoading(false);
-      console.log(error);
-    }
-
-    if (data) {
-      setGetProjectsLoading(false);
-      setProjects(data);
-    }
-  }, []);
 
   const contextData = {
     projects,
@@ -102,8 +84,6 @@ const ProjectProvider = ({ children }: childrenIFace) => {
     addProjectError,
     addProject,
     resetProjectContext,
-    getProjectsLoading,
-    getProjects,
   };
 
   return (
