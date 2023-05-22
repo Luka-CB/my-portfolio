@@ -55,7 +55,7 @@ const UpdateForm = () => {
       setImageUrls(editProjectData.displayImages);
       setAdditionalInputs(editProjectData.screenshots);
     }
-  }, [editProjectData]);
+  }, [editProjectData, setAdditionalInputs, setImageUrls]);
 
   useEffect(() => {
     if (updateProjectSuccess) {

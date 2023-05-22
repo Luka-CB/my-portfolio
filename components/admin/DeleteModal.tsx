@@ -45,8 +45,8 @@ const DeleteModal: React.FC<propsIFace> = ({
           </div>
         ) : null}
         <p>
-          Are you sure? You are deleting <span>{projectName}</span>. It can't be
-          reversed!
+          Are you sure? You are deleting <span>{projectName}</span>. It
+          can&apos;t be reversed!
         </p>
         <div className={styles.btns}>
           <button
