@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styles from "../../styles/AdminProject.module.scss";
-import { projectDataIFace } from "@/context/project";
+import { ProjectContext, projectDataIFace } from "@/context/project";
 import { formatDistanceToNow } from "date-fns";
+import { BsPencil, BsTrash } from "react-icons/bs";
+import DeleteModal from "./DeleteModal";
 
 interface projectIFace {
   project: projectDataIFace;
+  index: number;
 }
 
-const Project: React.FC<projectIFace> = ({ project }) => {
+const Project: React.FC<projectIFace> = ({ project, index }) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const { setIsEditStateActive, setEditProjectData } =
+    useContext(ProjectContext);
+
   const date =
     project.created_at && formatDistanceToNow(new Date(project.created_at));
+
+  const handleEditClick = () => {
+    setIsEditStateActive(true);
+    setEditProjectData(project);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleDeleteClick = () => {
+    setOpenModal(true);
+    document.body.style.overflow = "hidden";
+  };
 
   return (
     <div className={styles.projectWrapper}>
@@ -21,7 +40,30 @@ const Project: React.FC<projectIFace> = ({ project }) => {
             Created: <em>{date} ago</em>
           </h4>
         </div>
+        <div className={styles.icons}>
+          <div
+            className={styles.edit}
+            title="Edit Project"
+            onClick={handleEditClick}
+          >
+            <BsPencil className={styles.pencil} />
+          </div>
+          <div
+            className={styles.delete}
+            title="Delete Project"
+            onClick={handleDeleteClick}
+          >
+            <BsTrash className={styles.trash} />
+          </div>
+        </div>
       </div>
+
+      <DeleteModal
+        projectName={project.name}
+        projectId={project.id || ""}
+        open={openModal}
+        close={() => setOpenModal(false)}
+      />
     </div>
   );
 };

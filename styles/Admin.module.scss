@@ -10,27 +10,8 @@ $secondary-active: #020da7;
   background-color: rgba(240, 248, 255, 0.123);
   backdrop-filter: blur(10px);
   width: 100%;
-  height: 100vh;
-  overflow-y: scroll;
+  min-height: 100vh;
   position: absolute;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px $primary-active;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $primary;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: $primary-hover;
-  }
 
   .icons {
     width: 100%;

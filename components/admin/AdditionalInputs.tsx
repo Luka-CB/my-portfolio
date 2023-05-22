@@ -148,7 +148,7 @@ const AdditionalInputs: React.FC<componentIFace> = ({ disabled }) => {
         type="button"
         className={styles.addMoreBtn}
         onClick={handleAddMoreInput}
-        disabled={disabled}
+        disabled={!additionalInputs[0]?.description}
       >
         Add More
       </button>

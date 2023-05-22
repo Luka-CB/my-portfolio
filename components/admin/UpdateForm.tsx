@@ -1,17 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import styles from "../../styles/AdminForm.module.scss";
 import { v4 as uuidv4 } from "uuid";
+import { GrClose } from "react-icons/gr";
 import { ProjectContext } from "@/context/project";
 import { Loader } from "../Loader";
-import AdditionalInputs from "./AdditionalInputs";
 import { AdditionalInputsContext } from "@/context/additionalInputs";
-import DisplayImageUrlInputs from "./DisplayImageUrlInputs";
 import { DisplayImageUrlInputsContext } from "@/context/displayImageUrlInputs";
+import DisplayImageUrlInputs from "./DisplayImageUrlInputs";
+import AdditionalInputs from "./AdditionalInputs";
 
-const Form = () => {
-  const { additionalInputs } = useContext(AdditionalInputsContext);
-
-  const { imageUrls } = useContext(DisplayImageUrlInputsContext);
+const UpdateForm = () => {
+  const { additionalInputs, setAdditionalInputs } = useContext(
+    AdditionalInputsContext
+  );
+  const { imageUrls, setImageUrls } = useContext(DisplayImageUrlInputsContext);
+  const {
+    editProjectData,
+    setIsEditStateActive,
+    updateProject,
+    updateProjectLoading,
+    updateProjectSuccess,
+  } = useContext(ProjectContext);
 
   const [name, setName] = useState("");
   const [siteUrl, setSiteUrl] = useState("");
@@ -19,41 +28,78 @@ const Form = () => {
   const [backendUrl, setBackendUrl] = useState("");
   const [description, setDescription] = useState("");
 
-  const { addProjectLoading, addProject, addProjectSuccess } =
-    useContext(ProjectContext);
-
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    addProject({
-      name,
-      displayImages: imageUrls,
-      websiteUrl: siteUrl,
-      frontendUrl,
-      backendUrl,
-      description,
-      screenshots: additionalInputs,
-    });
+    updateProject(
+      {
+        name,
+        displayImages: imageUrls,
+        websiteUrl: siteUrl,
+        frontendUrl,
+        backendUrl,
+        description,
+        screenshots: additionalInputs,
+      },
+      editProjectData.id || ""
+    );
   };
 
   useEffect(() => {
-    if (addProjectSuccess) {
+    if (editProjectData) {
+      setName(editProjectData.name);
+      setSiteUrl(editProjectData.websiteUrl);
+      setFrontendUrl(editProjectData.frontendUrl);
+      setBackendUrl(editProjectData.backendUrl);
+      setDescription(editProjectData.description);
+      setImageUrls(editProjectData.displayImages);
+      setAdditionalInputs(editProjectData.screenshots);
+    }
+  }, [editProjectData]);
+
+  useEffect(() => {
+    if (updateProjectSuccess) {
       window.location.reload();
     }
-  }, [addProjectSuccess]);
+  }, [updateProjectSuccess]);
 
   let disabled: any;
 
-  if (
-    addProjectLoading ||
-    (!name && !siteUrl && !frontendUrl && !description)
-  ) {
+  if (!name && !siteUrl && !frontendUrl && !description) {
     disabled = true;
   }
 
+  const handleCloseEditState = () => {
+    setIsEditStateActive(false);
+    setImageUrls([
+      {
+        id: uuidv4(),
+        url: "",
+      },
+    ]);
+    setAdditionalInputs([
+      {
+        id: uuidv4(),
+        additionalInputCount: 1,
+        description: "",
+        screenshotUrls: [
+          {
+            id: uuidv4(),
+            screenshotUrlCount: 1,
+            screenshotUrl: "",
+          },
+        ],
+      },
+    ]);
+  };
+
   return (
     <div className={styles.container}>
-      <h1>Add New Project</h1>
+      <h1>Update Project</h1>
+      <div className={styles.cancel} onClick={handleCloseEditState}>
+        <GrClose className={styles.closeIcon} />
+        <span>Cancel</span>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className={styles.mainInputs}>
           <input
@@ -97,7 +143,11 @@ const Form = () => {
             className={styles.submitBtn}
             disabled={disabled}
           >
-            {addProjectLoading ? <Loader width={25} height={25} /> : "Submit"}
+            {updateProjectLoading ? (
+              <Loader width={25} height={25} />
+            ) : (
+              "Submit"
+            )}
           </button>
         </div>
         <AdditionalInputs disabled={disabled} />
@@ -106,11 +156,11 @@ const Form = () => {
           className={styles.submitBtnSmScreen}
           disabled={disabled}
         >
-          {addProjectLoading ? <Loader width={25} height={25} /> : "Submit"}
+          {updateProjectLoading ? <Loader width={25} height={25} /> : "Submit"}
         </button>
       </form>
     </div>
   );
 };
 
-export default Form;
+export default UpdateForm;

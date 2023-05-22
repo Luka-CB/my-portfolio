@@ -13,6 +13,7 @@ import Head from "next/head";
 import { prisma } from "../config/prisma";
 import { projectDataIFace } from "@/context/project";
 import { GetServerSideProps } from "next";
+import UpdateForm from "@/components/admin/UpdateForm";
 
 interface propsIface {
   projects: projectDataIFace[];
@@ -20,6 +21,7 @@ interface propsIface {
 
 const Admin: React.FC<propsIface> = ({ projects }) => {
   const { user, setUser } = useContext(SigninContext);
+  const { isEditStateActive } = useContext(ProjectContext);
 
   const router = useRouter();
 
@@ -57,7 +59,7 @@ const Admin: React.FC<propsIface> = ({ projects }) => {
           </div>
           <div className={styles.content}>
             <div className={styles.col1}>
-              <Form />
+              {isEditStateActive ? <UpdateForm /> : <Form />}
             </div>
             <hr />
             <div className={styles.col2}>
@@ -67,8 +69,8 @@ const Admin: React.FC<propsIface> = ({ projects }) => {
                 </div>
               ) : (
                 <>
-                  {projects?.map((project) => (
-                    <Project key={project.id} project={project} />
+                  {projects?.map((project, i) => (
+                    <Project key={project.id} project={project} index={i} />
                   ))}
                 </>
               )}

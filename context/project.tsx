@@ -1,10 +1,11 @@
-import { createContext, ReactNode, useState, useCallback } from "react";
+import { createContext, ReactNode, useState } from "react";
+import axios from "axios";
 
 interface childrenIFace {
   children: ReactNode;
 }
 
-interface screenshotsIFace {
+export interface screenshotsIFace {
   id: string;
   description: string;
   screenshotUrls?: {
@@ -31,45 +32,51 @@ export interface projectDataIFace {
 }
 
 interface projectIface {
-  projects: projectDataIFace[];
   addProjectLoading: boolean;
   addProjectSuccess: boolean;
   addProjectError: string;
   addProject: (projectData: projectDataIFace) => void;
-  resetProjectContext: () => void;
+  updateProject: (projectData: projectDataIFace, projectId: string) => void;
+  deleteProject: (projectId: string) => void;
+  isEditStateActive: boolean;
+  setIsEditStateActive: any;
+  editProjectData: projectDataIFace;
+  setEditProjectData: any;
+  updateProjectLoading: boolean;
+  updateProjectSuccess: boolean;
+  delProjectLoading: boolean;
+  delProjectSuccess: boolean;
 }
 
 export const ProjectContext = createContext({} as projectIface);
 
 const ProjectProvider = ({ children }: childrenIFace) => {
-  const [projects, setProjects] = useState<projectDataIFace[]>([]);
-
   const [addProjectLoading, setAddProjectLoading] = useState(false);
   const [addProjectSuccess, setAddprojectSuccess] = useState(false);
   const [addProjectError, setAddProjectError] = useState("");
 
-  const resetProjectContext = () => {
-    setAddProjectLoading(false);
-    setAddprojectSuccess(false);
-    setAddProjectError("");
-  };
+  const [updateProjectLoading, setUpdateProjectLoading] = useState(false);
+  const [updateProjectSuccess, setUpdateprojectSuccess] = useState(false);
+
+  const [isEditStateActive, setIsEditStateActive] = useState(false);
+  const [editProjectData, setEditProjectData] = useState(
+    {} as projectDataIFace
+  );
+
+  const [delProjectLoading, setDelProjectLoading] = useState(false);
+  const [delProjectSuccess, setDelProjectSuccess] = useState(false);
 
   const addProject = async (projectData: projectDataIFace) => {
     setAddProjectLoading(true);
 
     try {
-      const res = await fetch("/api/addProject", {
-        method: "POST",
+      const { data } = await axios.post("/api/addProject", projectData, {
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(projectData),
       });
-
-      const data = await res.json();
 
       if (data) {
         setAddProjectLoading(false);
         setAddprojectSuccess(true);
-        setProjects((prev: any) => [...prev, data[0]]);
       }
     } catch (error) {
       setAddProjectLoading(false);
@@ -77,13 +84,69 @@ const ProjectProvider = ({ children }: childrenIFace) => {
     }
   };
 
+  const updateProject = async (
+    projectData: projectDataIFace,
+    projectId: string | undefined
+  ) => {
+    setUpdateProjectLoading(true);
+    setUpdateprojectSuccess(false);
+
+    try {
+      const { data } = await axios.put(
+        `/api/updateProject?projectId=${projectId}`,
+        projectData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (data) {
+        setUpdateProjectLoading(false);
+        setUpdateprojectSuccess(true);
+      }
+    } catch (error) {
+      setUpdateProjectLoading(false);
+      console.log(error);
+    }
+  };
+
+  const deleteProject = async (projectId: string) => {
+    setDelProjectLoading(true);
+    setDelProjectSuccess(false);
+
+    try {
+      const { data } = await axios.delete(
+        `/api/deleteProject?projectId=${projectId}`,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (data) {
+        setDelProjectLoading(false);
+        setDelProjectSuccess(true);
+      }
+    } catch (error) {
+      setDelProjectLoading(false);
+      console.log(error);
+    }
+  };
+
   const contextData = {
-    projects,
     addProjectLoading,
     addProjectSuccess,
     addProjectError,
     addProject,
-    resetProjectContext,
+    isEditStateActive,
+    setIsEditStateActive,
+    editProjectData,
+    setEditProjectData,
+    updateProjectLoading,
+    updateProjectSuccess,
+    updateProject,
+    delProjectLoading,
+    delProjectSuccess,
+    deleteProject,
   };
 
   return (
