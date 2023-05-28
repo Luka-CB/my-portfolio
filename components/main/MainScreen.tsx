@@ -46,8 +46,10 @@ const MainScreen = () => {
             <hr className={styles.hr} />
             <div className={styles.row3}>
               <button className={styles.dlBtn}>
-                <BsCloudDownload className={styles.dlIcon} />
-                <span>cv</span>
+                <Link href="https://drive.google.com/uc?export=download&id=1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T">
+                  <BsCloudDownload className={styles.dlIcon} />
+                  <span>cv</span>
+                </Link>
               </button>
               <button className={styles.ghBtn}>
                 <Link href="https://github.com/Luka-CB" target="_blank">

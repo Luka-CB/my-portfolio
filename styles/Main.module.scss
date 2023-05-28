@@ -153,37 +153,43 @@ $secondary-active: #020da7;
             outline: none;
             background-color: $primary;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             box-shadow: 0px 1px 3px black;
             cursor: pointer;
             transition: all 0.1s ease-in-out;
 
-            .dlIcon {
-              font-size: 1.5rem;
-              margin-right: 10px;
-              color: $secondary;
-              transition: all 0.1s ease-in-out;
-            }
+            a {
+              text-decoration: none;
+              display: flex;
+              align-items: center;
+              justify-content: center;
 
-            span {
-              text-transform: uppercase;
-              font-size: 1.3rem;
-              color: aliceblue;
-              font-weight: 600;
-              transition: all 0.2s ease-in-out;
+              .dlIcon {
+                font-size: 1.5rem;
+                margin-right: 10px;
+                color: $secondary;
+                transition: all 0.1s ease-in-out;
+              }
+
+              span {
+                text-transform: uppercase;
+                font-size: 1.3rem;
+                color: aliceblue;
+                font-weight: 600;
+                transition: all 0.2s ease-in-out;
+              }
             }
 
             &:hover {
               background-color: $primary-hover;
 
-              .dlIcon {
-                color: $secondary-hover;
-              }
+              a {
+                .dlIcon {
+                  color: $secondary-hover;
+                }
 
-              span {
-                color: rgb(255, 255, 255);
+                span {
+                  color: rgb(255, 255, 255);
+                }
               }
             }
 
@@ -192,12 +198,14 @@ $secondary-active: #020da7;
               transform: scale(0.97);
               box-shadow: none;
 
-              .dlIcon {
-                color: $secondary-active;
-              }
+              a {
+                .dlIcon {
+                  color: $secondary-active;
+                }
 
-              span {
-                color: rgb(218, 217, 217);
+                span {
+                  color: rgb(218, 217, 217);
+                }
               }
             }
           }
@@ -449,13 +457,15 @@ $secondary-active: #020da7;
               width: 200px;
               height: 50px;
 
-              .dlIcon {
-                font-size: 2rem;
-                margin-right: 20px;
-              }
+              a {
+                .dlIcon {
+                  font-size: 2rem;
+                  margin-right: 20px;
+                }
 
-              span {
-                font-size: 1.7rem;
+                span {
+                  font-size: 1.7rem;
+                }
               }
             }
 
