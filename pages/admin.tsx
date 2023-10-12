@@ -60,9 +60,9 @@ const Admin: React.FC<propsIface> = ({ projects }) => {
             </div>
             <hr />
             <div className={styles.col2}>
-              {true ? (
-                <div className={styles.spinner}>
-                  <Loader />
+              {projects?.length === 0 ? (
+                <div className={styles.noProjects}>
+                  <p>No Projects!</p>
                 </div>
               ) : (
                 <>
