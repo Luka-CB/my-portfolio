@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import styles from "../../styles/Main.module.scss";
 import { BsCloudDownload, BsGithub, BsLinkedin } from "react-icons/bs";
+import { VscOpenPreview } from "react-icons/vsc";
 import { DiJavascript1, DiReact } from "react-icons/di";
 import { FaVuejs, FaNodeJs } from "react-icons/fa";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
@@ -45,9 +46,12 @@ const MainScreen = () => {
             </div>
             <hr className={styles.hr} />
             <div className={styles.row3}>
-              <button className={styles.dlBtn}>
-                <Link href="https://drive.google.com/uc?export=download&id=1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T">
-                  <BsCloudDownload className={styles.dlIcon} />
+              <button className={styles.dlBtn} title="View CV">
+                <Link
+                  href="https://drive.google.com/file/d/1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T/preview"
+                  target="_blank"
+                >
+                  <VscOpenPreview className={styles.dlIcon} />
                   <span>cv</span>
                 </Link>
               </button>

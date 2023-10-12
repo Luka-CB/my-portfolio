@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Project" (
+CREATE TABLE "projects" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "displayImages" JSONB NOT NULL,
@@ -9,16 +9,7 @@ CREATE TABLE "Project" (
     "description" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
-    "screenshots" JSONB NOT NULL,
+    "screenshots" JSONB[],
 
-    CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
-
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "projects_pkey" PRIMARY KEY ("id")
 );

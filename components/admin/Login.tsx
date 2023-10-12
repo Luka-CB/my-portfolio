@@ -1,25 +1,47 @@
-import { useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "../../styles/AdminLogin.module.scss";
-import { SigninContext } from "@/context/signin";
 import { AiTwotoneHome } from "react-icons/ai";
-import { Loader } from "../Loader";
 import { useRouter } from "next/router";
+import { AuthContext } from "@/context/auth";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const { toggleAdmin } = useContext(AuthContext);
 
   const router = useRouter();
 
-  const { signIn, error, isLoading } = useContext(SigninContext);
+  useEffect(() => {
+    let timeOut: number;
+
+    if (errorMsg) {
+      timeOut = window.setTimeout(() => {
+        setErrorMsg("");
+      }, 1500);
+    }
+
+    return () => clearTimeout(timeOut);
+  }, [errorMsg]);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    signIn({
-      username,
-      password,
-    });
+    const storedUsername = process.env.NEXT_PUBLIC_USERNAME;
+    const storedPassword = process.env.NEXT_PUBLIC_PASSWORD;
+
+    if (storedUsername !== username) {
+      setErrorMsg("Incorrect Username!");
+      return;
+    }
+
+    if (storedPassword !== password) {
+      setErrorMsg("Incorrect Password!");
+      return;
+    }
+
+    toggleAdmin(true);
   };
 
   return (
@@ -31,7 +53,7 @@ const Login = () => {
       />
       <div className={styles.container}>
         <h1>Sign In to Use App</h1>
-        {error && <p>{error}</p>}
+        {errorMsg ? <p className={styles.errMsg}>{errorMsg}</p> : null}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -49,14 +71,7 @@ const Login = () => {
           />
 
           <button type="submit">
-            {isLoading ? (
-              <div className={styles.loadingBtn}>
-                <Loader width={25} height={25} />
-                <span>Signing In</span>
-              </div>
-            ) : (
-              <span>Sign In</span>
-            )}
+            <span>Sign In</span>
           </button>
         </form>
       </div>

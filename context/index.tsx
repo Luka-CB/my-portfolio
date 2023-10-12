@@ -4,14 +4,14 @@ import CodeLinkOptProvider from "./codeLinkOptions";
 import DisplayImageUrlInputsProvider from "./displayImageUrlInputs";
 import InfoModalProvider from "./infoModal";
 import ProjectProvider from "./project";
-import SigninProvider from "./signin";
 import StatesProvider from "./states";
+import AuthProvider from "./auth";
 
 const ContextProvider = ({ children }: any) => {
   return (
     <StatesProvider>
-      <InfoModalProvider>
-        <SigninProvider>
+      <AuthProvider>
+        <InfoModalProvider>
           <ProjectProvider>
             <CodeLinkOptProvider>
               <AdditionalInputsProvider>
@@ -21,8 +21,8 @@ const ContextProvider = ({ children }: any) => {
               </AdditionalInputsProvider>
             </CodeLinkOptProvider>
           </ProjectProvider>
-        </SigninProvider>
-      </InfoModalProvider>
+        </InfoModalProvider>
+      </AuthProvider>
     </StatesProvider>
   );
 };

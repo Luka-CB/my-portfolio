@@ -4,7 +4,6 @@ import { RiLogoutCircleRFill } from "react-icons/ri";
 import { AiTwotoneHome } from "react-icons/ai";
 import Form from "@/components/admin/Form";
 import Login from "@/components/admin/Login";
-import { SigninContext } from "@/context/signin";
 import { useRouter } from "next/router";
 import { ProjectContext } from "@/context/project";
 import Project from "@/components/admin/Project";
@@ -14,21 +13,19 @@ import { prisma } from "../config/prisma";
 import { projectDataIFace } from "@/context/project";
 import { GetServerSideProps } from "next";
 import UpdateForm from "@/components/admin/UpdateForm";
+import { AuthContext } from "@/context/auth";
 
 interface propsIface {
   projects: projectDataIFace[];
 }
 
 const Admin: React.FC<propsIface> = ({ projects }) => {
-  const { user, setUser } = useContext(SigninContext);
   const { isEditStateActive } = useContext(ProjectContext);
+  const { isAdminActive, toggleAdmin } = useContext(AuthContext);
 
   const router = useRouter();
 
-  const handleLogout = () => {
-    localStorage.removeItem("portfolioAdmin");
-    setUser({});
-  };
+  const handleLogout = () => toggleAdmin(false);
 
   return (
     <div className={styles.container}>
@@ -37,7 +34,7 @@ const Admin: React.FC<propsIface> = ({ projects }) => {
         <meta name="description" content="This is may portfolio" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      {!user?.id ? (
+      {!isAdminActive ? (
         <Login />
       ) : (
         <>
@@ -63,7 +60,7 @@ const Admin: React.FC<propsIface> = ({ projects }) => {
             </div>
             <hr />
             <div className={styles.col2}>
-              {false ? (
+              {true ? (
                 <div className={styles.spinner}>
                   <Loader />
                 </div>
