@@ -6,36 +6,15 @@ $secondary: #0515f2;
 $secondary-hover: #4955ff;
 $secondary-active: #020da7;
 
-.containerWithScroll {
-  overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px $primary-active;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $primary;
-    border-radius: 10px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: $primary-hover;
-  }
-}
-
-.container,
-.containerWithScroll {
-  background-color: rgba(240, 248, 255, 0.123);
+.background {
+  background-color: rgba(240, 248, 255, 0.133);
   backdrop-filter: blur(10px);
   width: 100%;
   height: 100vh;
-  position: absolute;
+  position: fixed;
+}
 
+.container {
   .homeIcon {
     position: absolute;
     top: 0;
@@ -58,13 +37,15 @@ $secondary-active: #020da7;
   }
   .projects {
     width: 90%;
-    min-height: 80vh;
-    margin: 100px auto;
+    height: 100%;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
+    padding-bottom: 50px;
     gap: 2em;
     position: relative;
+    top: 100px;
 
     .spinner {
       position: absolute;
@@ -82,7 +63,7 @@ $secondary-active: #020da7;
       .project {
         background-color: #0515f221;
         width: 450px;
-        max-height: 350px;
+        height: 100%;
         border-radius: 10px;
         box-shadow: 0 0 4px black;
         transition: all 0.2s ease-in-out;
@@ -189,7 +170,7 @@ $secondary-active: #020da7;
                   opacity: 1;
                   font-size: 2.8rem;
                   transition: all 0.2s ease-in-out;
-                  transition-delay: 800ms;
+                  transition-delay: 400ms;
                 }
               }
             }
@@ -354,11 +335,11 @@ $secondary-active: #020da7;
       .options {
         position: absolute;
         background-color: aliceblue;
-        width: 200px;
+        width: 100%;
         border: 2px solid $primary;
         border-radius: 7px;
-        top: 100%;
-        right: 10px;
+        bottom: 110%;
+        right: 0;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
@@ -384,11 +365,10 @@ $secondary-active: #020da7;
 
     @media (max-width: 1500px) {
       .projectWrapper {
-        height: 265px;
+        height: 230px;
 
         .project {
           width: 280px;
-          min-height: 230px;
 
           .displayImage {
             width: 100%;
@@ -452,10 +432,6 @@ $secondary-active: #020da7;
         }
 
         .options {
-          width: 120px;
-          top: 84%;
-          right: 6px;
-
           .link {
             font-size: small;
           }
@@ -502,12 +478,6 @@ $secondary-active: #020da7;
               }
             }
           }
-        }
-
-        .options {
-          width: 150px;
-          top: 97%;
-          right: 9px;
         }
       }
     }
@@ -565,9 +535,9 @@ $secondary-active: #020da7;
         }
 
         .options {
-          width: 200px;
-          top: 97%;
-          right: 12px;
+          .link {
+            font-size: medium;
+          }
         }
       }
     }
@@ -632,99 +602,20 @@ $secondary-active: #020da7;
             }
           }
         }
-
-        .options {
-          width: 95%;
-          top: 97%;
-          right: 9px;
-        }
       }
     }
 
     @media (min-width: 1920px) {
-      width: 90%;
-      min-height: 80vh;
-      margin: 100px auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      justify-items: center;
-      gap: 2em;
+      width: 100%;
 
       .projectWrapper {
+        height: 430px;
+
         .project {
-          width: 550px;
-          max-height: 450px;
-          border-radius: 20px;
+          width: 600px;
 
           .displayImage {
-            width: 100%;
-            height: 300px;
-            border-radius: 20px;
-
-            img {
-              border-top-left-radius: 20px;
-              border-top-right-radius: 20px;
-            }
-
-            .info {
-              width: 60px;
-              height: 60px;
-            }
-          }
-
-          .btns {
-            height: 120px;
-
-            .viewBtn {
-              width: 240px;
-              height: 60px;
-              border-radius: 15px;
-
-              .viewIcon {
-                font-size: 2.3rem;
-                margin-right: 15px;
-              }
-
-              span {
-                font-size: 1.3rem;
-              }
-            }
-
-            .codeBtn {
-              width: 240px;
-              height: 60px;
-              border-radius: 15px;
-
-              .codeIcon {
-                font-size: 2.3rem;
-                margin-right: 15px;
-              }
-
-              span {
-                font-size: 1.3rem;
-              }
-            }
-          }
-        }
-
-        .options {
-          width: 240px;
-          top: 94%;
-          right: 15px;
-
-          .link {
-            color: black;
-            padding: 10px 0;
-            width: 100%;
-            text-align: center;
-            font-size: 1.5rem;
-            color: $primary-active;
-            text-transform: uppercase;
-
-            &:hover {
-              background-color: #175e662c;
-              color: #0c8b99;
-            }
+            height: 350px;
           }
         }
       }

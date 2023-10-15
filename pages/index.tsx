@@ -5,7 +5,7 @@ import MainScreen from "../components/main/MainScreen";
 import SmallScreen from "../components/main/SmallScreen";
 
 export default function Home() {
-  const [windowSize, setWindowSize] = useState<number | "">("");
+  const [windowSize, setWindowSize] = useState<number | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -25,13 +25,7 @@ export default function Home() {
       <main className={styles.container}>
         <div className={styles.overlay}></div>
         <div>
-          {windowSize < 1050 &&
-          typeof window !== "undefined" &&
-          window.innerWidth < 1050 ? (
-            <SmallScreen />
-          ) : (
-            <MainScreen />
-          )}
+          {windowSize && windowSize < 1050 ? <SmallScreen /> : <MainScreen />}
         </div>
       </main>
     </>

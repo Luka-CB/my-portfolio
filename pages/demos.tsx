@@ -26,62 +26,71 @@ const Demos: React.FC<propsIFace> = ({ projects }) => {
   const { isCodeBtnOptionOpen, setIsCodeBtnOptionOpen, projectIndex } =
     useContext(CodeLinkOptContext);
 
-  return (
-    <div
-      className={
-        isinfoModalOpen ? styles.container : styles.containerWithScroll
-      }
-      onClick={() => setIsCodeBtnOptionOpen(false)}
-    >
-      <Head>
-        <title>Projects | {projects?.length}</title>
-        <meta name="description" content="This is may portfolio" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <AiTwotoneHome
-        className="homeIcon"
-        title="Home Page"
-        onClick={() => router.push("/")}
-      />
-      <div className={styles.projects}>
-        {false ? (
-          <div className={styles.spinner}>
-            <Loader />
-          </div>
-        ) : (
-          <>
-            {projects.map((project, i) => (
-              <div className={styles.projectWrapper} key={project.id}>
-                <Project project={project} index={i} />
-                {project.backendUrl &&
-                isCodeBtnOptionOpen &&
-                i === projectIndex ? (
-                  <div className={styles.options}>
-                    <a
-                      href={project.frontendUrl}
-                      target="_blank"
-                      className={styles.link}
-                    >
-                      frontend
-                    </a>
-                    <a
-                      href={project.backendUrl}
-                      target="_blank"
-                      className={styles.link}
-                    >
-                      backend
-                    </a>
-                  </div>
-                ) : null}
-              </div>
-            ))}
-          </>
-        )}
-      </div>
+  useEffect(() => {
+    if (isinfoModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isinfoModalOpen]);
 
-      {isinfoModalOpen ? <InfoModal /> : null}
-      {isCarouselOpen ? <Carousel /> : null}
-    </div>
+  return (
+    <>
+      <div className={styles.background}></div>
+      <div
+        className={styles.container}
+        onClick={() => setIsCodeBtnOptionOpen(false)}
+      >
+        <Head>
+          <title>Projects | {projects?.length}</title>
+          <meta name="description" content="This is may portfolio" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </Head>
+        <AiTwotoneHome
+          className="homeIcon"
+          title="Home Page"
+          onClick={() => router.push("/")}
+        />
+        <div className={styles.projects}>
+          {false ? (
+            <div className={styles.spinner}>
+              <Loader />
+            </div>
+          ) : (
+            <>
+              {projects.map((project, i) => (
+                <div className={styles.projectWrapper} key={project.id}>
+                  <Project project={project} index={i} />
+                  {/* {project.backendUrl &&
+                  isCodeBtnOptionOpen &&
+                  i === projectIndex ? (
+                    <div className={styles.options}>
+                      <a
+                        href={project.frontendUrl}
+                        target="_blank"
+                        className={styles.link}
+                      >
+                        frontend
+                      </a>
+                      <a
+                        href={project.backendUrl}
+                        target="_blank"
+                        className={styles.link}
+                      >
+                        backend
+                      </a>
+                    </div>
+                  ) : null} */}
+                </div>
+              ))}
+            </>
+          )}
+        </div>
+
+        {isinfoModalOpen ? <InfoModal /> : null}
+        {isCarouselOpen ? <Carousel /> : null}
+      </div>
+    </>
   );
 };
 

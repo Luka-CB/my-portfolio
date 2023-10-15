@@ -14,8 +14,12 @@ interface propsIFace {
 
 const Project: React.FC<propsIFace> = ({ project, index }) => {
   const { setIsInfoModalOpen, setPickedInfo } = useContext(InfoModalContext);
-  const { setIsCodeBtnOptionOpen, setProjectIndex } =
-    useContext(CodeLinkOptContext);
+  const {
+    isCodeBtnOptionOpen,
+    projectIndex,
+    setIsCodeBtnOptionOpen,
+    setProjectIndex,
+  } = useContext(CodeLinkOptContext);
 
   const handleModalOpen = () => {
     setIsInfoModalOpen(true);
@@ -70,6 +74,26 @@ const Project: React.FC<propsIFace> = ({ project, index }) => {
               </div>
             </div>
           )}
+          {project.backendUrl &&
+          isCodeBtnOptionOpen &&
+          index === projectIndex ? (
+            <div className={styles.options}>
+              <a
+                href={project.frontendUrl}
+                target="_blank"
+                className={styles.link}
+              >
+                frontend
+              </a>
+              <a
+                href={project.backendUrl}
+                target="_blank"
+                className={styles.link}
+              >
+                backend
+              </a>
+            </div>
+          ) : null}
         </button>
       </div>
     </div>
