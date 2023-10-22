@@ -23,8 +23,7 @@ const Demos: React.FC<propsIFace> = ({ projects }) => {
 
   const { isinfoModalOpen } = useContext(InfoModalContext);
   const { isCarouselOpen } = useContext(CarouselContext);
-  const { isCodeBtnOptionOpen, setIsCodeBtnOptionOpen, projectIndex } =
-    useContext(CodeLinkOptContext);
+  const { setIsCodeBtnOptionOpen } = useContext(CodeLinkOptContext);
 
   useEffect(() => {
     if (isinfoModalOpen) {
@@ -61,26 +60,6 @@ const Demos: React.FC<propsIFace> = ({ projects }) => {
               {projects.map((project, i) => (
                 <div className={styles.projectWrapper} key={project.id}>
                   <Project project={project} index={i} />
-                  {/* {project.backendUrl &&
-                  isCodeBtnOptionOpen &&
-                  i === projectIndex ? (
-                    <div className={styles.options}>
-                      <a
-                        href={project.frontendUrl}
-                        target="_blank"
-                        className={styles.link}
-                      >
-                        frontend
-                      </a>
-                      <a
-                        href={project.backendUrl}
-                        target="_blank"
-                        className={styles.link}
-                      >
-                        backend
-                      </a>
-                    </div>
-                  ) : null} */}
                 </div>
               ))}
             </>

@@ -1,7 +1,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styles from "../../styles/SmallScreen.module.scss";
-import { BsCloudDownload, BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
+import { VscOpenPreview } from "react-icons/vsc";
 import { DiJavascript1, DiReact } from "react-icons/di";
 import { FaVuejs, FaNodeJs } from "react-icons/fa";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
@@ -48,8 +49,8 @@ const MainScreen = () => {
             <div className={styles.row2}>
               <div className={styles.btns}>
                 <button className={styles.dlBtn}>
-                  <Link href="https://drive.google.com/uc?export=download&id=1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T">
-                    <BsCloudDownload className={styles.dlIcon} />
+                  <Link href="https://drive.google.com/file/d/1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T/preview">
+                    <VscOpenPreview className={styles.dlIcon} />
                     <span>cv</span>
                   </Link>
                 </button>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styles from "../../styles/Main.module.scss";
-import { BsCloudDownload, BsGithub, BsLinkedin } from "react-icons/bs";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { VscOpenPreview } from "react-icons/vsc";
 import { DiJavascript1, DiReact } from "react-icons/di";
 import { FaVuejs, FaNodeJs } from "react-icons/fa";

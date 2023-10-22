@@ -3,20 +3,13 @@ import Head from "next/head";
 import styles from "../styles/Main.module.scss";
 import MainScreen from "../components/main/MainScreen";
 import SmallScreen from "../components/main/SmallScreen";
+import useWindowWidth from "@/hooks/windowWidth";
 
 export default function Home() {
-  const [windowSize, setWindowSize] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", () => {
-        setWindowSize(window.innerWidth);
-      });
-    }
-  }, []);
+  const windowWidth = useWindowWidth();
 
   return (
-    <>
+    <div>
       <Head>
         <title>Welcome</title>
         <meta name="description" content="This is may portfolio" />
@@ -24,10 +17,8 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <div className={styles.overlay}></div>
-        <div>
-          {windowSize && windowSize < 1050 ? <SmallScreen /> : <MainScreen />}
-        </div>
+        <div>{windowWidth < 1050 ? <SmallScreen /> : <MainScreen />}</div>
       </main>
-    </>
+    </div>
   );
 }
