@@ -3,6 +3,7 @@ import styles from "../styles/InfoModal.module.scss";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { InfoModalContext } from "@/context/infoModal";
 import { CarouselContext } from "@/context/carousel";
+import { motion } from "framer-motion";
 
 const InfoModal = () => {
   const { setIsInfoModalOpen, pickedInfo } = useContext(InfoModalContext);
@@ -36,8 +37,27 @@ const InfoModal = () => {
   };
 
   return (
-    <div className={styles.modalBg} onClick={handleModalClose}>
-      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.2,
+      }}
+      exit={{ opacity: 0 }}
+      className={styles.modalBg}
+      onClick={handleModalClose}
+    >
+      <motion.div
+        initial={{ top: 0 }}
+        animate={{ top: "50%" }}
+        transition={{
+          duration: 0.5,
+          type: "spring",
+        }}
+        exit={{ top: 0, opacity: 0 }}
+        className={styles.container}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.close} onClick={handleModalClose}>
           <AiFillCloseCircle className={styles.closeIcon} />
         </div>
@@ -82,8 +102,8 @@ const InfoModal = () => {
             </div>
           ))}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

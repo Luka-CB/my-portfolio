@@ -13,6 +13,7 @@ import { CarouselContext } from "@/context/carousel";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
 import { prisma } from "../config/prisma";
+import { AnimatePresence } from "framer-motion";
 
 interface propsIFace {
   projects: projectDataIFace[];
@@ -66,7 +67,9 @@ const Demos: React.FC<propsIFace> = ({ projects }) => {
           )}
         </div>
 
-        {isinfoModalOpen ? <InfoModal /> : null}
+        <AnimatePresence>
+          {isinfoModalOpen ? <InfoModal /> : null}
+        </AnimatePresence>
         {isCarouselOpen ? <Carousel /> : null}
       </div>
     </>

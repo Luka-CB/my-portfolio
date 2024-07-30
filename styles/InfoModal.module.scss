@@ -13,8 +13,6 @@ $secondary-active: #020da7;
   background-color: rgba(0, 0, 0, 0.493);
   width: 100%;
   height: 100%;
-  animation: bgFade 0.1s ease-in-out;
-  transition: all 0.2s ease-in-out;
 
   .container {
     border: 3px solid $primary;
@@ -32,8 +30,6 @@ $secondary-active: #020da7;
     border-right: unset;
     border-right: unset;
     padding: 10px;
-    transition: all 0.2s ease-in-out;
-    animation: fadeIn 0.2s linear;
 
     @media (max-width: 1000px) {
       width: 100%;
@@ -235,25 +231,5 @@ $secondary-active: #020da7;
         }
       }
     }
-  }
-}
-
-@keyframes bgFade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    top: 0;
-  }
-  100% {
-    opacity: 1;
-    top: 50%;
   }
 }

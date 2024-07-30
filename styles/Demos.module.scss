@@ -126,13 +126,12 @@ $secondary-active: #020da7;
             transition: all 0.1s ease-in-out;
 
             .infoIcon {
-              font-size: 0.5rem;
-              opacity: 0;
+              font-size: 2.2rem;
               color: $primary-hover;
             }
 
             &:hover {
-              background-color: #00000036;
+              scale: 0.97;
             }
           }
 
@@ -163,15 +162,6 @@ $secondary-active: #020da7;
               .name {
                 transform: scale(3);
                 opacity: 1;
-              }
-
-              .info {
-                .infoIcon {
-                  opacity: 1;
-                  font-size: 2.8rem;
-                  transition: all 0.2s ease-in-out;
-                  transition-delay: 400ms;
-                }
               }
             }
           }
