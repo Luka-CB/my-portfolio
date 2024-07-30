@@ -86,7 +86,9 @@ const MainScreen = () => {
           <div className={styles.btnWrapper}>
             <button
               className={styles.demoBtn}
-              onClick={() => router.push("/demos")}
+              onClick={() =>
+                router.push("/demos", undefined, { shallow: true })
+              }
             >
               demo projects
             </button>
