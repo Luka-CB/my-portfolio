@@ -8,9 +8,17 @@ import { FaVuejs, FaNodeJs } from "react-icons/fa";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { MdAttachEmail } from "react-icons/md";
 import Link from "next/link";
+import { projectDataIFace } from "@/context/project";
+import Project from "../Project";
 
-const MainScreen = () => {
+interface propsIFace {
+  projects: projectDataIFace[];
+}
+
+const MainScreen: React.FC<propsIFace> = ({ projects }) => {
   const router = useRouter();
+
+  console.log(projects);
 
   return (
     <div>
@@ -18,14 +26,15 @@ const MainScreen = () => {
         <div className={styles.left}>
           <div className={styles.devInfoContainer}>
             <div className={styles.row1}>
-              <h1 className={styles.row1Text}>hi, i am</h1>
               <div className={styles.name}>
-                <h1>luka</h1>
+                <h1 className={styles.text1}>hi, i am</h1>
+                <div className={styles.text2}>
+                  <h1>luka</h1>
+                </div>
               </div>
-            </div>
-            <div className={styles.row2}>
-              <h2 className={styles.row2Text}>full stack web developer</h2>
-
+              <div className={styles.title}>
+                <h2>full stack web developer</h2>
+              </div>
               <div className={styles.socialWrapper}>
                 <div className={styles.social}>
                   <MdAttachEmail className={styles.emailIcon} />
@@ -43,26 +52,26 @@ const MainScreen = () => {
                   </Link>
                 </div>
               </div>
+              <hr className={styles.hr} />
+              <div className={styles.btns}>
+                <button className={styles.dlBtn} title="View CV">
+                  <Link
+                    href="https://drive.google.com/file/d/1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T/preview"
+                    target="_blank"
+                  >
+                    <VscOpenPreview className={styles.dlIcon} />
+                    <span>cv</span>
+                  </Link>
+                </button>
+                <button className={styles.ghBtn}>
+                  <Link href="https://github.com/Luka-CB" target="_blank">
+                    <BsGithub className={styles.ghIcon} />
+                    <span>github</span>
+                  </Link>
+                </button>
+              </div>
             </div>
-            <hr className={styles.hr} />
-            <div className={styles.row3}>
-              <button className={styles.dlBtn} title="View CV">
-                <Link
-                  href="https://drive.google.com/file/d/1lcqYTG0BvHPoSXm79-J1G3vYaDWA6x0T/preview"
-                  target="_blank"
-                >
-                  <VscOpenPreview className={styles.dlIcon} />
-                  <span>cv</span>
-                </Link>
-              </button>
-              <button className={styles.ghBtn}>
-                <Link href="https://github.com/Luka-CB" target="_blank">
-                  <BsGithub className={styles.ghIcon} />
-                  <span>github</span>
-                </Link>
-              </button>
-            </div>
-            <div className={styles.row4}>
+            <div className={styles.row2}>
               <div className={styles.js}>
                 <DiJavascript1 className={styles.jsIcon} />
               </div>
@@ -80,18 +89,13 @@ const MainScreen = () => {
         </div>
         <div className={styles.right}>
           <div className={styles.checkBtnText}>
-            <span>check out some of my</span>
+            <span>projects</span>
             <IoMdArrowDropdownCircle className={styles.arrowIcon} />
           </div>
-          <div className={styles.btnWrapper}>
-            <button
-              className={styles.demoBtn}
-              onClick={() =>
-                router.push("/demos", undefined, { shallow: true })
-              }
-            >
-              demo projects
-            </button>
+          <div className={styles.projects}>
+            {projects.map((project, i) => (
+              <Project key={project.id} project={project} index={i} />
+            ))}
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styles from "../styles/Demos.module.scss";
+import styles from "../styles/Project.module.scss";
 import { VscOpenPreview, VscCode, VscInfo } from "react-icons/vsc";
 import { AiFillCaretDown } from "react-icons/ai";
 import { InfoModalContext } from "@/context/infoModal";
@@ -29,7 +29,7 @@ const Project: React.FC<propsIFace> = ({ project, index }) => {
   const handleOpenOptions = (e: any) => {
     e.stopPropagation();
     setProjectIndex(index);
-    setIsCodeBtnOptionOpen(true);
+    setIsCodeBtnOptionOpen(!isCodeBtnOptionOpen);
   };
 
   return (
